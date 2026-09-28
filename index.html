@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AnuncieAqui - Classificados</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📢</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--pri:#e53e3e;--pri-d:#c53030;--pri-l:#fc8181;--sec:#2b6cb0;--acc:#f6ad55;--suc:#38a169;--dgr:#e53e3e;--inf:#3182ce;--g50:#f7fafc;--g100:#edf2f7;--g200:#e2e8f0;--g300:#cbd5e0;--g400:#a0aec0;--g500:#718096;--g600:#4a5568;--g700:#2d3748;--g800:#1a202c;--g900:#171923;--sh:0 2px 8px rgba(0,0,0,.08);--sh2:0 8px 30px rgba(0,0,0,.12);--r:12px;--r2:20px;--tr:.25s ease}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:var(--g50);color:var(--g800);line-height:1.6}a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%;display:block}.container{max-width:1280px;margin:0 auto;padding:0 16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border:none;border-radius:var(--r);font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;transition:var(--tr);white-space:nowrap}
+.btn-pri{background:var(--pri);color:#fff}.btn-pri:hover{background:var(--pri-d);transform:translateY(-1px);box-shadow:var(--sh2)}.btn-out{background:transparent;color:var(--pri);border:2px solid var(--pri)}.btn-out:hover{background:var(--pri);color:#fff}.btn-gry{background:var(--g100);color:var(--g700)}.btn-gry:hover{background:var(--g200)}.btn-grn{background:var(--suc);color:#fff}.btn-sm{padding:8px 16px;font-size:.85rem}.btn-lg{padding:16px 32px;font-size:1.1rem}.btn-block{width:100%}.btn-ic{width:42px;height:42px;padding:0;border-radius:50%}
+.fg{margin-bottom:18px}.fg label{display:block;margin-bottom:6px;font-weight:600;color:var(--g700);font-size:.9rem}.fg input,.fg select,.fg textarea{width:100%;padding:12px 16px;border:2px solid var(--g200);border-radius:var(--r);font-family:inherit;font-size:1rem;transition:var(--tr);background:#fff;color:var(--g800)}.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(229,62,62,.12)}.fg textarea{min-height:120px;resize:vertical}.fg select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");background-position:right 12px center;background-repeat:no-repeat;background-size:1.5em;padding-right:40px}.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hdr{background:#fff;box-shadow:var(--sh);position:sticky;top:0;z-index:999}.hdr-top{background:var(--g800);color:var(--g300);padding:8px 0;font-size:.82rem}.hdr-top .container{display:flex;justify-content:space-between;align-items:center}.hdr-main{padding:12px 0}.hdr-main .container{display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;gap:6px;font-size:1.65rem;font-weight:800;color:var(--pri);flex-shrink:0;cursor:pointer}.logo i{font-size:1.9rem}.logo span{background:linear-gradient(135deg,var(--pri),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sbar{flex:1;display:flex;max-width:620px}.sbar input{flex:1;padding:11px 16px;border:2px solid var(--g200);border-right:none;border-radius:var(--r) 0 0 var(--r);font-size:.95rem;min-width:0}.sbar input:focus{outline:none;border-color:var(--pri)}.sbar select{padding:11px;border:2px solid var(--g200);border-right:none;background:var(--g50);font-family:inherit;min-width:130px;cursor:pointer;font-size:.9rem}.sbar button{padding:11px 20px;background:var(--pri);color:#fff;border:none;border-radius:0 var(--r) var(--r) 0;cursor:pointer;font-size:1.1rem}
+.hdr-act{display:flex;align-items:center;gap:8px;flex-shrink:0}.hdr-act .btn-acc{background:var(--acc);color:var(--g800);font-weight:700}.hdr-act .btn-acc:hover{background:#ed8936;color:#fff}
+.umenu{position:relative}.umenu-btn{display:flex;align-items:center;gap:6px;padding:8px 12px;background:none;border:2px solid transparent;border-radius:var(--r);cursor:pointer}.umenu-btn:hover{background:var(--g100)}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0}.avatar-lg{width:56px;height:56px;font-size:1.25rem}.avatar-xl{width:72px;height:72px;font-size:1.75rem}
+.udrop{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border-radius:var(--r);box-shadow:var(--sh2);min-width:210px;display:none;overflow:hidden;border:1px solid var(--g100)}.udrop.show{display:block;animation:fadeIn .2s}.udrop a{display:flex;align-items:center;gap:10px;padding:12px 16px;color:var(--g700);font-size:.92rem;transition:var(--tr);cursor:pointer}.udrop a:hover{background:var(--g50);color:var(--pri)}.udrop a.logout{color:var(--dgr);border-top:1px solid var(--g100)}.udrop-head{padding:14px 16px;border-bottom:1px solid var(--g100)}.udrop-head strong{display:block;font-size:.95rem}.udrop-head small{color:var(--g500)}
+.cnav{background:#fff;border-top:1px solid var(--g100);padding:10px 0}.cnav .container{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.cnav .container::-webkit-scrollbar{display:none}.cl{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:50px;font-size:.85rem;color:var(--g600);white-space:nowrap;transition:var(--tr);cursor:pointer}.cl:hover,.cl.active{background:var(--pri);color:#fff}
+.hero{background:linear-gradient(135deg,var(--g900),var(--g800) 50%,var(--pri-d));padding:60px 0;text-align:center;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:-50%;right:-15%;width:500px;height:500px;background:radial-gradient(circle,rgba(229,62,62,.12),transparent 70%);border-radius:50%}.hero .container{position:relative;z-index:1}.hero h1{color:#fff;font-size:clamp(2rem,5vw,3.25rem);font-weight:900;margin-bottom:12px;line-height:1.2}.hero h1 em{background:linear-gradient(135deg,var(--acc),var(--pri-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-style:normal}.hero p{color:var(--g300);font-size:1.15rem;margin-bottom:28px;max-width:600px;margin-left:auto;margin-right:auto}.hero-search{display:flex;max-width:580px;margin:0 auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.2)}.hero-search input{flex:1;padding:14px 18px;border:none;font-size:1.05rem}.hero-search input:focus{outline:none}.hero-search button{padding:14px 24px;background:var(--pri);color:#fff;border:none;cursor:pointer;font-size:1.15rem}
+.hstats{display:flex;justify-content:center;gap:40px;margin-top:36px}.hstat{text-align:center;color:#fff}.hstat strong{display:block;font-size:2rem;font-weight:800;color:var(--acc)}.hstat span{color:var(--g400);font-size:.92rem}
+.sec{padding:48px 0}.sec-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:12px}.sec-t{font-size:1.65rem;font-weight:800;color:var(--g800)}.sec-s{color:var(--g500);font-size:1.02rem}.sec .view-all{color:var(--pri);font-weight:600;display:flex;align-items:center;gap:4px;cursor:pointer}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}.ccard{background:#fff;border-radius:var(--r);padding:24px 12px;text-align:center;transition:var(--tr);border:2px solid transparent;cursor:pointer}.ccard:hover{transform:translateY(-4px);box-shadow:var(--sh2);border-color:var(--pri-l)}.ccard .ci{width:52px;height:52px;border-radius:var(--r);background:rgba(229,62,62,.08);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.35rem;color:var(--pri);transition:var(--tr)}.ccard:hover .ci{background:var(--pri);color:#fff}.ccard h3{font-size:.88rem;font-weight:600;color:var(--g700)}.ccard .cc{font-size:.78rem;color:var(--g400)}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}.acard{background:#fff;border-radius:var(--r);overflow:hidden;transition:var(--tr);border:1px solid var(--g100)}.acard:hover{transform:translateY(-5px);box-shadow:var(--sh2)}.acard .aimg{position:relative;height:190px;overflow:hidden;background:var(--g100)}.acard .aimg img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.acard:hover .aimg img{transform:scale(1.05)}.acard .aimg .noimg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--g200);color:var(--g400);font-size:2.5rem}.abadge{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:50px;font-size:.72rem;font-weight:700;text-transform:uppercase}.bg-dest{background:var(--acc);color:var(--g800)}.bg-nov{background:var(--suc);color:#fff}.favbtn{position:absolute;top:10px;right:10px;width:34px;height:34px;background:#fff;border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);box-shadow:var(--sh);color:var(--g400);font-size:1rem}.favbtn:hover,.favbtn.on{color:var(--dgr);background:#fff5f5;transform:scale(1.1)}.acard .abody{padding:14px}.acard .acat{font-size:.75rem;color:var(--pri);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}.acard .atitle{font-size:1rem;font-weight:700;color:var(--g800);margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;cursor:pointer}.acard .atitle:hover{color:var(--pri)}.acard .aprice{font-size:1.25rem;font-weight:800;color:var(--pri);margin-bottom:10px}.acard .afoot{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--g100);font-size:.82rem;color:var(--g500)}
+.banner{background:linear-gradient(135deg,var(--sec),#1a4a7a);border-radius:var(--r2);padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;color:#fff}.banner h2{font-size:1.55rem;font-weight:800;margin-bottom:10px}.banner p{opacity:.88;margin-bottom:18px;max-width:500px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}.step{text-align:center;padding:28px}.step .sn{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--pri),var(--pri-l));color:#fff;font-size:1.35rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}.step .si{font-size:2.2rem;color:var(--pri);margin-bottom:10px}.step h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}.step p{color:var(--g500);line-height:1.7}
+.pl{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:24px 0}.sidebar{background:#fff;border-radius:var(--r);padding:20px;box-shadow:var(--sh);height:fit-content;position:sticky;top:110px}.sidebar h3{font-size:1.05rem;font-weight:700;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--g100)}.fgroup{margin-bottom:18px}.fgroup h4{font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--g700)}.fgroup label{display:flex;align-items:center;gap:8px;padding:4px 0;cursor:pointer;font-size:.88rem;color:var(--g600);transition:var(--tr)}.fgroup label:hover{color:var(--pri)}.fgroup input[type=checkbox],.fgroup input[type=radio]{accent-color:var(--pri);width:16px;height:16px}.prange{display:flex;gap:8px;align-items:center}.prange input{width:100%;padding:8px;border:2px solid var(--g200);border-radius:var(--r);font-family:inherit;font-size:.9rem}
+.rbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}.rcount{color:var(--g600);font-size:.92rem}.rcount b{color:var(--pri)}.sortbox select{padding:8px 32px 8px 12px;border:2px solid var(--g200);border-radius:var(--r);font-family:inherit;font-size:.9rem;background:#fff;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");background-position:right 8px center;background-repeat:no-repeat;background-size:1.2em}
+.dl{display:grid;grid-template-columns:1fr 360px;gap:24px;padding:24px 0}.dgallery{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}.dgallery img{width:100%;height:420px;object-fit:cover}.dgallery .noimg{width:100%;height:420px;display:flex;align-items:center;justify-content:center;background:var(--g200);color:var(--g400);font-size:5rem}.dinfo{background:#fff;border-radius:var(--r);padding:20px;box-shadow:var(--sh);margin-top:20px}.dinfo h1{font-size:1.55rem;font-weight:800;margin-bottom:8px}.dprice{font-size:2.1rem;font-weight:800;color:var(--pri);margin-bottom:18px}.dmeta{display:flex;flex-wrap:wrap;gap:18px;padding:18px 0;border-top:1px solid var(--g100);border-bottom:1px solid var(--g100);margin-bottom:18px}.dmeta span{display:flex;align-items:center;gap:6px;color:var(--g600);font-size:.92rem}.dmeta i{color:var(--pri)}.ddesc h3{font-size:1.08rem;margin-bottom:8px}.ddesc p{color:var(--g600);line-height:1.8;white-space:pre-line}
+.dside{position:sticky;top:110px;height:fit-content}.scard{background:#fff;border-radius:var(--r);padding:20px;box-shadow:var(--sh);margin-bottom:18px}.scard h3{font-size:1.08rem;margin-bottom:14px;display:flex;align-items:center;gap:8px}.sinfo{display:flex;align-items:center;gap:12px;margin-bottom:14px}.sinfo .sn{font-weight:700;font-size:1.05rem}.sinfo .sm{color:var(--g500);font-size:.85rem}.cbtns{display:flex;flex-direction:column;gap:10px}.cbtns .btn{width:100%}.stips{background:#fffbeb;border:1px solid #fbbf24;border-radius:var(--r);padding:18px}.stips h4{color:#92400e;margin-bottom:10px;display:flex;align-items:center;gap:6px}.stips li{padding:4px 0;color:#92400e;font-size:.88rem;display:flex;align-items:flex-start;gap:6px}.stips li::before{content:'⚠️';flex-shrink:0}
+.moverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(3px)}.moverlay.show{display:flex;animation:fadeIn .2s}.modal{background:#fff;border-radius:var(--r2);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:slideUp .3s}.modal-hd{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--g100)}.modal-hd h2{font-size:1.25rem}.modal-bd{padding:20px}.mclose{width:34px;height:34px;border:none;background:var(--g100);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.15rem;color:var(--g500);transition:var(--tr)}.mclose:hover{background:var(--g200);color:var(--g800)}
+.adiv{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--g400);font-size:.9rem}.adiv::before,.adiv::after{content:'';flex:1;height:1px;background:var(--g200)}.asw{text-align:center;margin-top:18px;color:var(--g500)}.asw a{color:var(--pri);font-weight:600;cursor:pointer}
+.dl-out{display:grid;grid-template-columns:240px 1fr;gap:24px;padding:24px 0}.dside-nav{background:#fff;border-radius:var(--r);box-shadow:var(--sh);height:fit-content;overflow:hidden}.dside-nav .uinfo{padding:20px;text-align:center;border-bottom:1px solid var(--g100)}.dside-nav .uinfo h3{margin-top:10px;font-size:1.05rem}.dside-nav .uinfo p{color:var(--g500);font-size:.85rem}.dnav a{display:flex;align-items:center;gap:10px;padding:12px 18px;color:var(--g600);font-size:.92rem;transition:var(--tr);border-left:3px solid transparent;cursor:pointer}.dnav a:hover,.dnav a.active{background:var(--g50);color:var(--pri);border-left-color:var(--pri)}.dnav a .bg{margin-left:auto;background:var(--pri);color:#fff;padding:2px 8px;border-radius:50px;font-size:.72rem;font-weight:700}
+.dmain{background:#fff;border-radius:var(--r);padding:24px;box-shadow:var(--sh)}.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}.scard2{border:2px solid var(--g100);border-radius:var(--r);padding:18px;display:flex;align-items:center;gap:12px;transition:var(--tr)}.scard2:hover{border-color:var(--pri-l);box-shadow:var(--sh)}.scard2 .si2{width:48px;height:48px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:1.15rem}.si2.bg-p{background:rgba(229,62,62,.1);color:var(--pri)}.si2.bg-s{background:rgba(56,161,105,.1);color:var(--suc)}.si2.bg-i{background:rgba(49,130,206,.1);color:var(--inf)}.si2.bg-w{background:rgba(214,158,46,.1);color:#d69e2e}.scard2 .sv{font-size:1.35rem;font-weight:800}.scard2 .sl{color:var(--g500);font-size:.82rem}
+.tbl-wrap{overflow-x:auto}.tbl{width:100%;border-collapse:collapse}.tbl th{text-align:left;padding:12px 14px;background:var(--g50);color:var(--g600);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--g200)}.tbl td{padding:12px 14px;border-bottom:1px solid var(--g100);font-size:.92rem;vertical-align:middle}.tbl tr:hover{background:var(--g50)}
+.toast-wrap{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px}.toast{padding:14px 20px;border-radius:var(--r);color:#fff;font-weight:600;box-shadow:var(--sh2);display:flex;align-items:center;gap:8px;animation:slideIn .3s}.toast-s{background:var(--suc)}.toast-e{background:var(--dgr)}.toast-i{background:var(--inf)}
+.uparea{border:2px dashed var(--g300);border-radius:var(--r);padding:32px;text-align:center;cursor:pointer;transition:var(--tr);background:var(--g50)}.uparea:hover{border-color:var(--pri);background:rgba(229,62,62,.04)}.uparea i{font-size:2.5rem;color:var(--g400);margin-bottom:10px}.uparea input[type=file]{display:none}.upprev{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.upprev img{width:80px;height:80px;object-fit:cover;border-radius:8px}
+.alert{padding:14px 18px;border-radius:var(--r);margin-bottom:18px;display:flex;align-items:center;gap:10px;font-size:.92rem}.alert-s{background:#f0fff4;color:#276749;border:1px solid #9ae6b4}.alert-e{background:#fff5f5;color:#c53030;border:1px solid #feb2b2}.alert-w{background:#fffbeb;color:#92400e;border:1px solid #fbbf24}
+.ftr{background:var(--g900);color:var(--g400);padding:48px 0 0}.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;padding-bottom:36px}.fgrid h4{color:#fff;font-size:1.05rem;margin-bottom:16px}.fgrid a{display:block;padding:4px 0;font-size:.92rem;transition:var(--tr);cursor:pointer}.fgrid a:hover{color:#fff;padding-left:5px}.fgrid p{line-height:1.7;margin-bottom:16px;font-size:.92rem}.fsoc{display:flex;gap:8px}.fsoc a{width:38px;height:38px;background:var(--g800);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--g400);transition:var(--tr);padding:0}.fsoc a:hover{background:var(--pri);color:#fff}.fbot{border-top:1px solid var(--g800);padding:18px 0;display:flex;justify-content:space-between;align-items:center;font-size:.88rem;flex-wrap:wrap;gap:12px}.fbot-links{display:flex;gap:18px}.fbot-links a{color:var(--g400)}
+.bcrumb{padding:14px 0;font-size:.88rem;color:var(--g500)}.bcrumb a{color:var(--g600);cursor:pointer}.bcrumb a:hover{color:var(--pri)}.bcrumb i{margin:0 8px;font-size:.7rem}
+.cta{background:linear-gradient(135deg,var(--pri),var(--pri-d));text-align:center;color:#fff;padding:56px 0}.cta h2{font-size:2.15rem;font-weight:800;margin-bottom:12px}.cta p{font-size:1.1rem;opacity:.9;margin-bottom:24px;max-width:550px;margin-left:auto;margin-right:auto}.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.bcard{background:#fff;padding:24px;border-radius:var(--r);border-left:4px solid var(--pri);transition:var(--tr)}.bcard:hover{box-shadow:var(--sh2);transform:translateY(-3px)}.bcard .bi{font-size:1.85rem;color:var(--pri);margin-bottom:12px}.bcard h3{font-size:1.08rem;font-weight:700;margin-bottom:6px}.bcard p{color:var(--g500);line-height:1.7}
+.empty{text-align:center;padding:48px 24px}.empty i{font-size:3.5rem;color:var(--g300);margin-bottom:16px}.empty h3{margin-bottom:8px}.empty p{color:var(--g500);margin-bottom:18px}.spin{width:36px;height:36px;border:4px solid var(--g200);border-top-color:var(--pri);border-radius:50%;animation:rot .7s linear infinite;margin:32px auto}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}@keyframes slideIn{from{opacity:0;transform:translateX(100%)}to{opacity:1;transform:translateX(0)}}@keyframes rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@media(max-width:1024px){.dl{grid-template-columns:1fr}.dside{position:static}.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.hdr-main .container{flex-wrap:wrap}.sbar{order:3;max-width:100%;width:100%}.hero h1{font-size:2rem}.hstats{gap:20px}.hstat strong{font-size:1.5rem}.pl{grid-template-columns:1fr}.sidebar{position:static}.banner{grid-template-columns:1fr}.dl-out{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.fbot{flex-direction:column;text-align:center}.agrid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}.cgrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}}
+@media(max-width:480px){.hero-search{flex-direction:column;border-radius:16px}.hero-search button{border-radius:0 0 16px 16px}.agrid{grid-template-columns:1fr}.cgrid{grid-template-columns:repeat(2,1fr)}.hdr-top{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-top">
+    <div class="container">
+      <div><i class="fas fa-headset"></i> Ajuda &nbsp;|&nbsp; <i class="fas fa-envelope"></i> Contato</div>
+      <div><i class="fas fa-phone"></i> (11) 4000-0000</div>
+    </div>
+  </div>
+  <div class="hdr-main">
+    <div class="container">
+      <a class="logo" onclick="go('home')"><i class="fas fa-bullhorn"></i><span>Anuncie</span>Aqui</a>
+      <form class="sbar" onsubmit="doSearch(event)">
+        <select id="hdrCat"><option value="">Categorias</option></select>
+        <input type="text" id="hdrQ" placeholder="O que você procura?">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+      <div class="hdr-act" id="userArea"></div>
+    </div>
+  </div>
+  <nav class="cnav"><div class="container" id="catNav"></div></nav>
+</header>
+
+<main id="app"></main>
+
+<footer class="ftr">
+  <div class="container">
+    <div class="fgrid">
+      <div>
+        <a class="logo" style="font-size:1.45rem;margin-bottom:12px" onclick="go('home')">
+          <i class="fas fa-bullhorn"></i><span>Anuncie</span><span style="color:#fff;-webkit-text-fill-color:#fff">Aqui</span>
+        </a>
+        <p>O melhor site de classificados do Brasil. Compre, venda e troque com segurança e facilidade.</p>
+        <div class="fsoc">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div><h4>Links Rápidos</h4>
+        <a onclick="go('home')">Início</a><a onclick="go('buscar')">Buscar</a>
+        <a onclick="go('publicar')">Publicar</a><a href="#">Planos</a>
+      </div>
+      <div><h4>Ajuda</h4>
+        <a href="#">FAQ</a><a href="#">Segurança</a><a href="#">Contato</a><a href="#">Termos</a>
+      </div>
+      <div><h4>Contato</h4>
+        <a href="#"><i class="fas fa-map-marker-alt"></i> São Paulo, SP</a>
+        <a href="#"><i class="fas fa-phone"></i> (11) 4000-0000</a>
+        <a href="#"><i class="fas fa-envelope"></i> contato@anuncieaqui.com</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <p>&copy; 2025 AnuncieAqui. Todos os direitos reservados.</p>
+      <div class="fbot-links"><a href="#">Termos</a><a href="#">Privacidade</a><a href="#">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- Login Modal -->
+<div class="moverlay" id="loginModal">
+  <div class="modal" style="max-width:440px">
+    <div class="modal-hd"><h2><i class="fas fa-sign-in-alt"></i> Entrar</h2>
+      <button class="mclose" onclick="hideModal('loginModal')">&times;</button></div>
+    <div class="modal-bd">
+      <div id="loginAlert"></div>
+      <form onsubmit="doLogin(event)">
+        <div class="fg"><label>E-mail</label><input type="email" id="loginEmail" required placeholder="demo@email.com" value="demo@email.com"></div>
+        <div class="fg"><label>Senha</label><input type="password" id="loginPass" required placeholder="123456" value="123456"></div>
+        <button type="submit" class="btn btn-pri btn-block btn-lg"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+      </form>
+      <div class="adiv">ou</div>
+      <div class="asw">Não tem conta? <a onclick="hideModal('loginModal');showModal('regModal')">Cadastre-se</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="moverlay" id="regModal">
+  <div class="modal" style="max-width:440px">
+    <div class="modal-hd"><h2><i class="fas fa-user-plus"></i> Criar Conta</h2>
+      <button class="mclose" onclick="hideModal('regModal')">&times;</button></div>
+    <div class="modal-bd">
+      <div id="regAlert"></div>
+      <form onsubmit="doRegister(event)">
+        <div class="fg"><label>Nome *</label><input type="text" id="regName" required placeholder="Seu nome"></div>
+        <div class="fg"><label>E-mail *</label><input type="email" id="regEmail" required placeholder="seu@email.com"></div>
+        <div class="fg"><label>Telefone</label><input type="tel" id="regPhone" placeholder="(11) 99999-9999"></div>
+        <div class="fg"><label>Senha * (mín. 6)</label><input type="password" id="regPass" required minlength="6"></div>
+        <div class="fg"><label>Confirmar Senha *</label><input type="password" id="regPass2" required></div>
+        <button type="submit" class="btn btn-pri btn-block btn-lg"><i class="fas fa-user-plus"></i> Criar Conta</button>
+      </form>
+      <div class="asw">Já tem conta? <a onclick="hideModal('regModal');showModal('loginModal')">Faça login</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- Message Modal -->
+<div class="moverlay" id="msgModal">
+  <div class="modal">
+    <div class="modal-hd"><h2><i class="fas fa-comment-dots"></i> Enviar Mensagem</h2>
+      <button class="mclose" onclick="hideModal('msgModal')">&times;</button></div>
+    <div class="modal-bd">
+      <div id="msgInfo"></div>
+      <form onsubmit="sendMessage(event)">
+        <input type="hidden" id="msgDest"><input type="hidden" id="msgAnuncio">
+        <div class="fg"><label>Sua Mensagem</label><textarea id="msgText" required placeholder="Olá! Tenho interesse neste produto..."></textarea></div>
+        <button type="submit" class="btn btn-pri btn-block"><i class="fas fa-paper-plane"></i> Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== MOCK DATA =====
+const MOCK_CATS = [
+  {id:1,nome:'Veículos',slug:'veiculos',icone:'fa-car',ordem:1},
+  {id:2,nome:'Imóveis',slug:'imoveis',icone:'fa-home',ordem:2},
+  {id:3,nome:'Eletrônicos',slug:'eletronicos',icone:'fa-laptop',ordem:3},
+  {id:4,nome:'Móveis',slug:'moveis',icone:'fa-couch',ordem:4},
+  {id:5,nome:'Moda',slug:'moda',icone:'fa-tshirt',ordem:5},
+  {id:6,nome:'Serviços',slug:'servicos',icone:'fa-tools',ordem:6},
+  {id:7,nome:'Esportes',slug:'esportes',icone:'fa-futbol',ordem:7},
+  {id:8,nome:'Pets',slug:'pets',icone:'fa-paw',ordem:8},
+  {id:9,nome:'Livros',slug:'livros',icone:'fa-book',ordem:9},
+  {id:10,nome:'Emprego',slug:'emprego',icone:'fa-briefcase',ordem:10},
+  {id:11,nome:'Outros',slug:'outros',icone:'fa-th-large',ordem:11}
+];
+
+const MOCK_ANUNCIOS = [
+  {id:1,usuario_id:'u1',categoria_id:3,titulo:'iPhone 15 Pro Max 256GB - Lacrado',descricao:'iPhone 15 Pro Max novo, lacrado na caixa. Cor: Titânio Natural. Acompanha todos os acessórios originais. Garantia de 1 ano. Aceito PIX, cartão ou transferência.\n\n• 256GB de armazenamento\n• Tela Super Retina XDR de 6,7"\n• Chip A17 Pro\n• Sistema de câmera tripla de 48MP',preco:7299.00,tipo:'venda',condicao:'novo',cidade:'São Paulo',estado:'SP',imagem_url:'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&h=400&fit=crop',status:'ativo',destaque:true,views:2847,criado_em:'2025-01-15T10:30:00Z'},
+  {id:2,usuario_id:'u2',categoria_id:1,titulo:'Honda Civic 2022 EXL CVT - 18.000km',descricao:'Honda Civic 2022 EXL CVT com apenas 18.000 km rodados. Impecável, todas as revisões feitas na concessionária. Teto solar, bancos de couro, central multimídia, piloto automático.\n\n• Motor 2.0 Flex\n• Câmbio CVT\n• Teto solar\n• Bancos de couro',preco:129900.00,tipo:'venda',condicao:'seminovo',cidade:'Curitiba',estado:'PR',imagem_url:'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=600&h=400&fit=crop',status:'ativo',destaque:true,views:5432,criado_em:'2025-01-14T14:20:00Z'},
+  {id:3,usuario_id:'u3',categoria_id:2,titulo:'Apartamento 2 Quartos - Vila Mariana',descricao:'Apartamento aconchegante de 2 quartos na Vila Mariana, São Paulo. 65m², 1 vaga de garagem, andar alto, portaria 24h. Próximo ao metrô, mercado, farmácia.\n\n• 2 quartos sendo 1 suíte\n• Sala ampla\n• Cozinha planejada\n• Prédio com academia e salão de festas',preco:2800.00,tipo:'aluguel',condicao:'novo',cidade:'São Paulo',estado:'SP',imagem_url:'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=400&fit=crop',status:'ativo',destaque:true,views:3210,criado_em:'2025-01-13T08:15:00Z'},
+  {id:4,usuario_id:'u1',categoria_id:4,titulo:'Sofá 3 Lugares Retrátil e Reclinável',descricao:'Sofá 3 lugares retrátil e reclinável, tecido veludo cinza. Excelente estado, sem rasgos ou manchas. Dimensões: 220x95x90cm. Vendo por mudança.',preco:1200.00,tipo:'venda',condicao:'usado',cidade:'Belo Horizonte',estado:'MG',imagem_url:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&h=400&fit=crop',status:'ativo',destaque:false,views:876,criado_em:'2025-01-12T16:45:00Z'},
+  {id:5,usuario_id:'u4',categoria_id:3,titulo:'MacBook Pro M3 14" - 512GB SSD',descricao:'MacBook Pro 14 polegadas com chip M3, 512GB SSD, 18GB RAM. Comprado há 3 meses, praticamente novo. Acompanha carregador original e caixa.',preco:12500.00,tipo:'venda',condicao:'seminovo',cidade:'Rio de Janeiro',estado:'RJ',imagem_url:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=400&fit=crop',status:'ativo',destaque:true,views:1893,criado_em:'2025-01-11T11:00:00Z'},
+  {id:6,usuario_id:'u5',categoria_id:5,titulo:'Tênis Nike Air Max 270 - Tam 42',descricao:'Tênis Nike Air Max 270 original, tamanho 42, cor preto/vermelho. Usado apenas 3 vezes, como novo. Acompanha caixa original.',preco:450.00,tipo:'venda',condicao:'seminovo',cidade:'Salvador',estado:'BA',imagem_url:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=400&fit=crop',status:'ativo',destaque:false,views:432,criado_em:'2025-01-10T09:30:00Z'},
+  {id:7,usuario_id:'u2',categoria_id:6,titulo:'Reformas e Reparos - Eletricista',descricao:'Serviço de eletricista com 15 anos de experiência. Instalação de chuveiros, troca de disjuntores, instalação de luminárias, elétrica de piscina.\n\nAtendimento rápido e garantia no serviço. WhatsApp disponível.',preco:150.00,tipo:'servico',condicao:'novo',cidade:'Brasília',estado:'DF',imagem_url:'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop',status:'ativo',destaque:false,views:1234,criado_em:'2025-01-09T14:00:00Z'},
+  {id:8,usuario_id:'u6',categoria_id:8,titulo:'Golden Retriever Filhote - Vacinado',descricao:'Filhotes de Golden Retriever, 2 meses, vacinados e vermifugados. Pai e mãe com pedigree. Filhotes saudáveis e brincalhões.',preco:3500.00,tipo:'venda',condicao:'novo',cidade:'Porto Alegre',estado:'RS',imagem_url:'https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=400&fit=crop',status:'ativo',destaque:false,views:2156,criado_em:'2025-01-08T12:30:00Z'},
+  {id:9,usuario_id:'u7',categoria_id:7,titulo:'Bicicleta Caloi Elite Carbon - Tam M',descricao:'Bicicleta Caloi Elite Carbon aro 29, tamanho M. Grupo Shimano 105, freio hidráulico, rodas Vzan. Comprada em 2023, pouco uso.',preco:8500.00,tipo:'venda',condicao:'seminovo',cidade:'Florianópolis',estado:'SC',imagem_url:'https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=600&h=400&fit=crop',status:'ativo',destaque:false,views:765,criado_em:'2025-01-07T17:00:00Z'},
+  {id:10,usuario_id:'u3',categoria_id:3,titulo:'Samsung Galaxy S24 Ultra 512GB',descricao:'Samsung Galaxy S24 Ultra 512GB, cor cinza. Acompanha capa, película e carregador. Todos os acessórios originais.',preco:5899.00,tipo:'venda',condicao:'novo',cidade:'Fortaleza',estado:'CE',imagem_url:'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&h=400&fit=crop',status:'ativo',destaque:false,views:1567,criado_em:'2025-01-06T10:00:00Z'},
+  {id:11,usuario_id:'u4',categoria_id:4,titulo:'Mesa de Jantar 6 Lugares Madeira Maciça',descricao:'Mesa de jantar para 6 lugares em madeira maciça de peroba. Ótimo estado, mede 180x90cm. Vendo por mudança.',preco:2200.00,tipo:'venda',condicao:'usado',cidade:'Recife',estado:'PE',imagem_url:'https://images.unsplash.com/photo-1617806118233-18e1de247200?w=600&h=400&fit=crop',status:'ativo',destaque:false,views:543,criado_em:'2025-01-05T15:30:00Z'},
+  {id:12,usuario_id:'u5',categoria_id:9,titulo:'Coleção Harry Potter - 7 Livros',descricao:'Coleção completa de Harry Potter, 7 livros, edição Scholastic. Todos em bom estado de conservação. Capas duras.',preco:180.00,tipo:'venda',condicao:'usado',cidade:'Campinas',estado:'SP',imagem_url:'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=400&fit=crop',status:'ativo',destaque:false,views:321,criado_em:'2025-01-04T13:00:00Z'}
+];
+
+const MOCK_USERS = {
+  u1:{id:'u1',nome:'Carlos Silva',telefone:'(11) 99876-5432',email:'carlos@email.com'},
+  u2:{id:'u2',nome:'Ana Oliveira',telefone:'(21) 98765-4321',email:'ana@email.com'},
+  u3:{id:'u3',nome:'Pedro Santos',telefone:'(31) 97654-3210',email:'pedro@email.com'},
+  u4:{id:'u4',nome:'Mariana Costa',telefone:'(41) 96543-2109',email:'mariana@email.com'},
+  u5:{id:'u5',nome:'Lucas Pereira',telefone:'(51) 95432-1098',email:'lucas@email.com'},
+  u6:{id:'u6',nome:'Fernanda Lima',telefone:'(61) 94321-0987',email:'fernanda@email.com'},
+  u7:{id:'u7',nome:'Roberto Alves',telefone:'(71) 93210-9876',email:'roberto@email.com'}
+};
+
+const ESTADOS = {AC:'Acre',AL:'Alagoas',AP:'Amapá',AM:'Amazonas',BA:'Bahia',CE:'Ceará',DF:'Distrito Federal',ES:'Espírito Santo',GO:'Goiás',MA:'Maranhão',MT:'Mato Grosso',MS:'Mato Grosso do Sul',MG:'Minas Gerais',PA:'Pará',PB:'Paraíba',PR:'Paraná',PE:'Pernambuco',PI:'Piauí',RJ:'Rio de Janeiro',RN:'Rio Grande do Norte',RS:'Rio Grande do Sul',RO:'Rondônia',RR:'Roraima',SC:'Santa Catarina',SP:'São Paulo',SE:'Sergipe',TO:'Tocantins'};
+
+// ===== STATE =====
+let state = {
+  user: null,
+  route: 'home',
+  categorias: MOCK_CATS,
+  anuncios: [...MOCK_ANUNCIOS],
+  favoritos: new Set(),
+  searchQuery: '',
+  searchCat: '',
+  searchOrd: 'recentes',
+  currentAnuncioId: null,
+  tab: 'dashboard'
+};
+
+// ===== UTILS =====
+function $(s){return document.querySelector(s)}
+function $$(s){return document.querySelectorAll(s)}
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+function fmt(v){return 'R '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function timeAgo(dt){const s=Math.floor((Date.now()-new Date(dt))/1000);if(s<60)return'Agora';if(s<3600)return Math.floor(s/60)+'min';if(s<86400)return Math.floor(s/3600)+'h';return Math.floor(s/86400)+'d'}
+function ini(n){return(n||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase()}
+function toast(msg,type='i'){const el=document.createElement('div');el.className=`toast toast-${type}`;const ic={s:'fa-check-circle',e:'fa-exclamation-circle',i:'fa-info-circle'};el.innerHTML=`<i class="fas ${ic[type]||ic.i}"></i> ${msg}`;$('#toastWrap').appendChild(el);setTimeout(()=>{el.style.opacity='0';el.style.transform='translateX(100%)';setTimeout(()=>el.remove(),300)},3500)}
+function showModal(id){const m=document.getElementById(id);if(m){m.classList.add('show');document.body.style.overflow='hidden'}}
+function hideModal(id){const m=document.getElementById(id);if(m){m.classList.remove('show');document.body.style.overflow=''}}
+
+document.addEventListener('click',e=>{if(e.target.classList.contains('moverlay')){e.target.classList.remove('show');document.body.style.overflow=''}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$$$$('.moverlay.show').forEach(m=>{m.classList.remove('show');document.body.style.overflow=''})});
+
+// ===== ROUTER =====
+function go(route,params={}){state.route=route;Object.assign(state,params);window.scrollTo({top:0,behavior:'smooth'});render();hideModal('viewModal')}
+function doSearch(e){e.preventDefault();go('buscar',{searchQuery:$('#hdrQ').value,searchCat:$('#hdrCat').value})}
+
+// ===== AUTH (MOCK) =====
+function doLogin(e){
+  e.preventDefault();
+  const email=$('#loginEmail').value, pass=$('#loginPass').value;
+  if(!email||!pass){$('#loginAlert').innerHTML='<div class="alert alert-e">Preencha todos os campos.</div>';return}
+  const uid=Object.keys(MOCK_USERS).find(k=>MOCK_USERS[k].email===email);
+  state.user=MOCK_USERS[uid]||{id:'demo',nome:'Usuário Demo',email:email,telefone:'(11) 99999-9999'};
+  toast('Login realizado com sucesso! 🎉','s');
+  hideModal('loginModal');
+  updateHeader();render();
+}
+
+function doRegister(e){
+  e.preventDefault();
+  const p=$('#regPass').value,p2=$('#regPass2').value;
+  if(p!==p2){$('#regAlert').innerHTML='<div class="alert alert-e">As senhas não coincidem.</div>';return}
+  const id='u'+Date.now();
+  state.user={id:id,nome:$('#regName').value,email:$('#regEmail').value,telefone:$('#regPhone').value};
+  toast('Conta criada! Bem-vindo(a)! 🎉','s');
+  hideModal('regModal');
+  updateHeader();render();
+}
+
+function doLogout(){
+  state.user=null;state.favoritos=new Set();
+  updateHeader();go('home');
+  toast('Você saiu da conta.','i');
+}
+
+function updateHeader(){
+  const area=$('#userArea');
+  if(state.user){
+    area.innerHTML=`
+      <a onclick="go('painel')" class="btn btn-ic btn-gry" title="Painel"><i class="fas fa-user"></i></a>
+      <a onclick="go('publicar')" class="btn btn-sm btn-acc"><i class="fas fa-plus"></i> Anunciar</a>
+      <div class="umenu">
+        <button class="umenu-btn" onclick="document.getElementById('udrop').classList.toggle('show')">
+          <div class="avatar">${ini(state.user.nome)}</div>
+          <i class="fas fa-chevron-down" style="font-size:.7rem;color:var(--g400)"></i>
+        </button>
+        <div class="udrop" id="udrop">
+          <div class="udrop-head"><strong>${esc(state.user.nome)}</strong><small>${esc(state.user.email)}</small></div>
+          <a onclick="go('painel')"><i class="fas fa-tachometer-alt"></i> Meu Painel</a>
+          <a onclick="go('painel',{tab:'anuncios'})"><i class="fas fa-list"></i> Meus Anúncios</a>
+          <a onclick="go('painel',{tab:'favoritos'})"><i class="fas fa-heart"></i> Favoritos</a>
+          <a onclick="doLogout()" class="logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        </div>
+      </div>`;
+    document.addEventListener('click',e=>{const um=document.querySelector('.umenu');const dd=$('#udrop');if(um&&dd&&!um.contains(e.target))dd.classList.remove('show')});
+  } else {
+    area.innerHTML=`
+      <a onclick="showModal('loginModal')" class="btn btn-out btn-sm"><i class="fas fa-sign-in-alt"></i> Entrar</a>
+      <a onclick="go('publicar')" class="btn btn-sm btn-acc"><i class="fas fa-plus"></i> Anunciar</a>`;
+  }
+}
+
+// ===== FAVORITOS =====
+function toggleFav(id){
+  if(!state.user){showModal('loginModal');return}
+  const was=state.favoritos.has(id);
+  if(was){state.favoritos.delete(id);toast('Removido dos favoritos.','i')}
+  else{state.favoritos.add(id);toast('Adicionado aos favoritos! ❤️','s')}
+  $$(`[data-fav="{id}"]`).forEach(btn=>{
+    const ic=btn.querySelector('i');
+    if(was){ic.className='far fa-heart';btn.classList.remove('on')}
+    else{ic.className='fas fa-heart';btn.classList.add('on')}
+  });
+}
+
+function sendMessage(e){
+  e.preventDefault();
+  if(!state.user){showModal('loginModal');return}
+  toast('Mensagem enviada com sucesso! 📩','s');
+  hideModal('msgModal');$('#msgText').value='';
+}
+
+function openMsg(destId,anuncioId){
+  if(!state.user){showModal('loginModal');return}
+  $('#msgDest').value=destId;$('#msgAnuncio').value=anuncioId||'';
+  showModal('msgModal');
+}
+
+function deleteAnuncio(id){
+  if(!confirm('Excluir este anúncio?'))return;
+  state.anuncios=state.anuncios.filter(a=>a.id!==id);
+  toast('Anúncio excluído!','s');render();
+}
+
+function sharePage(){
+  if(navigator.share){navigator.share({title:document.title,url:location.href})}
+  else{navigator.clipboard.writeText(location.href);toast('Link copiado! 📋','s')}
+}
+
+// ===== RENDER COMPONENTS =====
+function renderAdCard(a){
+  const isFav=state.favoritos.has(a.id);
+  const cat=state.categorias.find(c=>c.id===a.categoria_id);
+  return`<div class="acard">
+    <div class="aimg">
+      ${a.imagem_url?`<img src="${esc(a.imagem_url)}" alt="${esc(a.titulo)}" loading="lazy">`:`<div class="noimg"><i class="fas fa-image"></i></div>`}
+      ${a.destaque?'<span class="abadge bg-dest">⭐ Destaque</span>':''}
+      <button class="favbtn ${isFav?'on':''}" data-fav="${a.id}" onclick="toggleFav(${a.id});return false">
+        <i class="${isFav?'fas':'far'} fa-heart"></i>
+      </button>
+    </div>
+    <div class="abody">
+      <p class="acat">${esc(cat?.nome||'')}</p>
+      <a class="atitle" onclick="go('anuncio',{currentAnuncioId:${a.id}})">${esc(a.titulo)}</a>
+      <div class="aprice">${fmt(a.preco)}</div>
+      <div class="afoot">
+        <span><i class="fas fa-map-marker-alt"></i> ${esc(a.cidade)}, ${esc(a.estado)}</span>
+        <span><i class="far fa-clock"></i> ${timeAgo(a.criado_em)}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderCatGrid(){
+  return state.categorias.map(c=>`
+    <a class="ccard" onclick="go('buscar',{searchCat:${c.id}})">
+      <div class="ci"><i class="fas ${c.icone}"></i></div>
+      <h3>${esc(c.nome)}</h3>
+      <p class="cc">Ver anúncios</p>
+    </a>`).join('');
+}
+
+function renderEstadoOpts(sel=''){
+  return Object.entries(ESTADOS).map(([s,n])=>`<option value="${s}" ${sel===s?'selected':''}>${n}</option>`).join('');
+}
+
+// ===== PAGES =====
+function renderHome(){
+  const destaques=state.anuncios.filter(a=>a.destaque).slice(0,4);
+  const recentes=[...state.anuncios].sort((a,b)=>new Date(b.criado_em)-new Date(a.criado_em)).slice(0,8);
+  return`
+  <section class="hero">
+    <div class="container">
+      <h1>Compre, Venda e <em>Troque</em><br>com Facilidade</h1>
+      <p>O maior portal de classificados. Encontre milhares de ofertas na sua região.</p>
+      <form class="hero-search" onsubmit="doSearch(event)">
+        <input type="text" id="hdrQ" placeholder="O que você procura?">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+      <div class="hstats">
+        <div class="hstat"><strong>${state.anuncios.length}+</strong><span>Anúncios</span></div>
+        <div class="hstat"><strong>${state.categorias.length}+</strong><span>Categorias</span></div>
+        <div class="hstat"><strong>100%</strong><span>Grátis</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="container">
+      <div class="sec-hd"><div><h2 class="sec-t">Explore por Categoria</h2><p class="sec-s">Encontre exatamente o que procura</p></div>
+        <a class="view-all" onclick="go('buscar')">Ver todas <i class="fas fa-arrow-right"></i></a></div>
+      <div class="cgrid">${renderCatGrid()}</div>
+    </div>
+  </section>
+  <section class="sec" style="background:var(--g100)">
+    <div class="container">
+      <div class="sec-hd"><div><h2 class="sec-t">⭐ Anúncios em Destaque</h2><p class="sec-s">Ofertas selecionadas</p></div></div>
+      <div class="agrid">${destaques.map(renderAdCard).join('')}</div>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="container">
+      <div class="banner">
+        <div><h2>💼 Venda mais rápido</h2>
+          <p>Destaque seus anúncios e alcance mais compradores. Planos a partir de R$ 29,90.</p>
+          <a class="btn btn-lg" style="background:var(--acc);color:var(--g800)">Ver Planos</a></div>
+        <i class="fas fa-chart-line" style="font-size:6rem;opacity:.25"></i>
+      </div>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="container">
+      <div class="sec-hd"><div><h2 class="sec-t">Últimos Anúncios</h2><p class="sec-s">Novidades adicionadas recentemente</p></div>
+        <a class="view-all" onclick="go('buscar')">Ver todos <i class="fas fa-arrow-right"></i></a></div>
+      <div class="agrid">${recentes.map(renderAdCard).join('')}</div>
+    </div>
+  </section>
+  <section class="sec" style="background:#fff">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:32px"><h2 class="sec-t">Como Funciona</h2><p class="sec-s">Publique em apenas 3 passos</p></div>
+      <div class="steps">
+        <div class="step"><div class="sn">1</div><div class="si"><i class="fas fa-user-plus"></i></div><h3>Crie sua Conta</h3><p>Cadastro gratuito em menos de 1 minuto.</p></div>
+        <div class="step"><div class="sn">2</div><div class="si"><i class="fas fa-camera"></i></div><h3>Publique seu Anúncio</h3><p>Adicione fotos, descrição e preço.</p></div>
+        <div class="step"><div class="sn">3</div><div class="si"><i class="fas fa-handshake"></i></div><h3>Faça Negócios</h3><p>Receba mensagens e feche negociações.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="sec" style="background:var(--g100)">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:32px"><h2 class="sec-t">Por que AnuncieAqui?</h2></div>
+      <div class="bgrid">
+        <div class="bcard"><div class="bi"><i class="fas fa-shield-alt"></i></div><h3>Segurança</h3><p>Verificação e dicas para negociações seguras.</p></div>
+        <div class="bcard"><div class="bi"><i class="fas fa-globe"></i></div><h3>Alcance Nacional</h3><p>Seus anúncios são vistos em todo o Brasil.</p></div>
+        <div class="bcard"><div class="bi"><i class="fas fa-bolt"></i></div><h3>Publicação Rápida</h3><p>Interface intuitiva para publicar em minutos.</p></div>
+        <div class="bcard"><div class="bi"><i class="fas fa-mobile-alt"></i></div><h3>Responsivo</h3><p>Acesse de qualquer dispositivo.</p></div>
+        <div class="bcard"><div class="bi"><i class="fas fa-comments"></i></div><h3>Chat Integrado</h3><p>Converse direto pela plataforma.</p></div>
+        <div class="bcard"><div class="bi"><i class="fas fa-chart-bar"></i></div><h3>Analytics</h3><p>Acompanhe estatísticas dos seus anúncios.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="cta">
+    <div class="container">
+      <h2>Pronto para começar?</h2>
+      <p>Publique seu anúncio grátis e alcance milhares de compradores.</p>
+      <div class="cta-btns">
+        <a class="btn btn-lg" style="background:var(--acc);color:var(--g800)" onclick="go('publicar')"><i class="fas fa-plus-circle"></i> Publicar Anúncio Grátis</a>
+        <a class="btn btn-lg btn-out" style="border-color:#fff;color:#fff" onclick="go('buscar')"><i class="fas fa-search"></i> Explorar Anúncios</a>
+      </div>
+    </div>
+  </section>`;
+}
+
+function renderBuscar(){
+  return`
+  <div class="container">
+    <nav class="bcrumb"><a onclick="go('home')">Início</a><i class="fas fa-chevron-right"></i><span>Buscar Anúncios</span></nav>
+    <div class="pl">
+      <aside class="sidebar">
+        <h3><i class="fas fa-sliders-h"></i> Filtros</h3>
+        <div class="fgroup"><h4>Categoria</h4>
+          <select id="fCat" class="form-control" onchange="doFilter()">
+            <option value="">Todas</option>
+            ${state.categorias.map(c=>`<option value="${c.id}" ${state.searchCat==c.id?'selected':''}>${esc(c.nome)}</option>`).join('')}
+          </select></div>
+        <div class="fgroup"><h4>Preço (R$)</h4>
+          <div class="prange"><input type="number" id="fPmin" placeholder="Mín" onchange="doFilter()"><span>—</span><input type="number" id="fPmax" placeholder="Máx" onchange="doFilter()"></div></div>
+        <div class="fgroup"><h4>Estado</h4>
+          <select id="fEst" class="form-control" onchange="doFilter()"><option value="">Todos</option>${renderEstadoOpts()}</select></div>
+        <div class="fgroup"><h4>Condição</h4>
+          <label><input type="radio" name="fCond" value="" checked onchange="doFilter()"> Todos</label>
+          <label><input type="radio" name="fCond" value="novo" onchange="doFilter()"> Novo</label>
+          <label><input type="radio" name="fCond" value="seminovo" onchange="doFilter()"> Semi-novo</label>
+          <label><input type="radio" name="fCond" value="usado" onchange="doFilter()"> Usado</label></div>
+        <div class="fgroup"><h4>Tipo</h4>
+          <label><input type="radio" name="fTipo" value="" checked onchange="doFilter()"> Todos</label>
+          <label><input type="radio" name="fTipo" value="venda" onchange="doFilter()"> Venda</label>
+          <label><input type="radio" name="fTipo" value="aluguel" onchange="doFilter()"> Aluguel</label>
+          <label><input type="radio" name="fTipo" value="servico" onchange="doFilter()"> Serviço</label></div>
+      </aside>
+      <main>
+        <div class="rbar">
+          <div class="rcount" id="rCount"></div>
+          <div class="sortbox"><select onchange="state.searchOrd=this.value;doFilter()">
+            <option value="recentes">Mais Recentes</option>
+            <option value="menor">Menor Preço</option>
+            <option value="maior">Maior Preço</option>
+            <option value="vistas">Mais Vistas</option>
+          </select></div>
+        </div>
+        <div class="agrid" id="gridBusca"></div>
+      </main>
+    </div>
+  </div>`;
+}
+
+function renderAnuncio(){
+  return`<div class="container"><nav class="bcrumb"><a onclick="go('home')">Início</a><i class="fas fa-chevron-right"></i><span>Detalhes</span></nav><div class="dl" id="detailArea"><div class="spin" style="grid-column:1/-1"></div></div></div>`;
+}
+
+function renderPublicar(){
+  if(!state.user)return`<div style="min-height:60vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--g900),var(--g800))">
+    <div style="text-align:center;color:#fff"><i class="fas fa-lock" style="font-size:4rem;opacity:.5;margin-bottom:16px"></i>
+    <h2 style="margin-bottom:12px">Faça login para publicar</h2>
+    <button class="btn btn-lg" style="background:var(--acc);color:var(--g800)" onclick="showModal('loginModal')">Entrar</button></div></div>`;
+  return`<div class="container" style="max-width:750px;padding:24px 16px">
+    <div style="background:#fff;border-radius:var(--r2);padding:28px;box-shadow:var(--sh2)">
+      <h1 style="font-size:1.55rem;margin-bottom:6px"><i class="fas fa-plus-circle" style="color:var(--pri)"></i> Publicar Anúncio</h1>
+      <p style="color:var(--g500);margin-bottom:24px">Preencha os detalhes do seu anúncio.</p>
+      <div id="pubAlert"></div>
+      <form onsubmit="submitAnuncio(event)">
+        <div class="fg"><label>Tipo</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            ${['venda|fa-tag|Venda','aluguel|fa-key|Aluguel','servico|fa-tools|Serviço','troca|fa-exchange-alt|Troca'].map((t,i)=>{
+              const[v,ic,n]=t.split('|');
+              return`<label style="flex:1;min-width:100px;text-align:center;padding:14px;border:2px solid ${i===0?'var(--pri)':'var(--g200)'};border-radius:var(--r);cursor:pointer;background:${i===0?'rgba(229,62,62,.05)':'transparent'}" class="tipo-opt">
+                <input type="radio" name="tipo" value="${v}" ${i===0?'checked':''} style="display:none">
+                <i class="fas ${ic}" style="color:var(--pri);font-size:1.3rem"></i><br><strong>${n}</strong></label>`;
+            }).join('')}
+          </div></div>
+        <div class="fg"><label>Título *</label><input type="text" name="titulo" required maxlength="200" placeholder="Ex: iPhone 15 Pro - Impecável"></div>
+        <div class="fg"><label>Categoria *</label><select name="categoria_id" required><option value="">Selecione</option>
+          ${state.categorias.map(c=>`<option value="${c.id}">${esc(c.nome)}</option>`).join('')}</select></div>
+        <div class="fg"><label>Descrição *</label><textarea name="descricao" required rows="6" placeholder="Descreva detalhadamente..."></textarea></div>
+        <div class="frow">
+          <div class="fg"><label>Preço (R$) *</label><input type="number" name="preco" required min="0" step="0.01" placeholder="0,00"></div>
+          <div class="fg"><label>Condição</label><select name="condicao"><option value="novo">Novo</option><option value="seminovo">Semi-novo</option><option value="usado" selected>Usado</option></select></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Cidade *</label><input type="text" name="cidade" required placeholder="Ex: São Paulo"></div>
+          <div class="fg"><label>Estado *</label><select name="estado" required><option value="">Selecione</option>${renderEstadoOpts()}</select></div>
+        </div>
+        <div class="fg"><label>Imagem (URL)</label><input type="url" name="imagem" placeholder="https://exemplo.com/foto.jpg"></div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:24px">
+          <a class="btn btn-gry" onclick="go('home')">Cancelar</a>
+          <button type="submit" class="btn btn-pri btn-lg"><i class="fas fa-rocket"></i> Publicar</button>
+        </div>
+      </form>
+    </div>
+  </div>`;
+}
+
+function renderPainel(){
+  if(!state.user)return`<div style="min-height:60vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--g900),var(--g800))">
+    <div style="text-align:center;color:#fff"><h2>Faça login para acessar seu painel</h2>
+    <button class="btn btn-lg" style="background:var(--acc);color:var(--g800);margin-top:16px" onclick="showModal('loginModal')">Entrar</button></div></div>`;
+  return`<div class="container"><div class="dl-out">
+    <aside class="dside-nav">
+      <div class="uinfo">
+        <div class="avatar avatar-xl" style="margin:0 auto">${ini(state.user.nome)}</div>
+        <h3>${esc(state.user.nome)}</h3><p>${esc(state.user.email)}</p>
+      </div>
+      <nav class="dnav">
+        <a class="${state.tab==='dashboard'?'active':''}" onclick="state.tab='dashboard';render()"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a class="${state.tab==='anuncios'?'active':''}" onclick="state.tab='anuncios';render()"><i class="fas fa-list"></i> Meus Anúncios</a>
+        <a onclick="go('publicar')"><i class="fas fa-plus-circle"></i> Novo Anúncio</a>
+        <a class="${state.tab==='favoritos'?'active':''}" onclick="state.tab='favoritos';render()"><i class="fas fa-heart"></i> Favoritos</a>
+        <a class="${state.tab==='mensagens'?'active':''}" onclick="state.tab='mensagens';render()"><i class="fas fa-envelope"></i> Mensagens</a>
+        <a onclick="doLogout()" style="color:var(--dgr)"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </nav>
+    </aside>
+    <main class="dmain" id="painelContent">${renderPainelContent()}</main>
+  </div></div>`;
+}
+
+function renderPainelContent(){
+  const tab=state.tab||'dashboard';
+  const meus=state.anuncios.filter(a=>a.usuario_id===state.user.id);
+  const favs=state.anuncios.filter(a=>state.favoritos.has(a.id));
+  const totalViews=meus.reduce((s,a)=>s+(a.views||0),0);
+
+  if(tab==='dashboard')return`
+    <h2 style="margin-bottom:20px">Visão Geral</h2>
+    <div class="sgrid">
+      <div class="scard2"><div class="si2 bg-p"><i class="fas fa-list"></i></div><div><div class="sv">${meus.length}</div><div class="sl">Anúncios</div></div></div>
+      <div class="scard2"><div class="si2 bg-i"><i class="fas fa-eye"></i></div><div><div class="sv">${totalViews}</div><div class="sl">Visualizações</div></div></div>
+      <div class="scard2"><div class="si2 bg-s"><i class="fas fa-heart"></i></div><div><div class="sv">${favs.length}</div><div class="sl">Favoritos</div></div></div>
+      <div class="scard2"><div class="si2 bg-w"><i class="fas fa-envelope"></i></div><div><div class="sv">3</div><div class="sl">Mensagens</div></div></div>
+    </div>
+    <h3 style="margin:24px 0 12px">Ações Rápidas</h3>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn btn-pri" onclick="go('publicar')"><i class="fas fa-plus"></i> Novo Anúncio</a>
+      <a class="btn btn-gry" onclick="state.tab='anuncios';render()"><i class="fas fa-list"></i> Meus Anúncios</a>
+    </div>`;
+
+  if(tab==='anuncios')return`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <h2>Meus Anúncios (${meus.length})</h2>
+      <a class="btn btn-pri btn-sm" onclick="go('publicar')"><i class="fas fa-plus"></i> Novo</a>
+    </div>
+    ${meus.length?`<div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Anúncio</th><th>Preço</th><th>Views</th><th>Status</th><th></th></tr></thead>
+      <tbody>${meus.map(a=>`<tr>
+        <td><a onclick="go('anuncio',{currentAnuncioId:${a.id}})" style="font-weight:600;cursor:pointer">${esc(a.titulo.substring(0,35))}...</a></td>
+        <td>${fmt(a.preco)}</td><td>${a.views||0}</td>
+        <td><span style="padding:3px 10px;border-radius:50px;font-size:.8rem;font-weight:600;background:var(--suc);color:#fff">${esc(a.status)}</span></td>
+        <td><button class="btn btn-sm btn-gry" onclick="deleteAnuncio(${a.id})"><i class="fas fa-trash"></i></button></td>
+      </tr>`).join('')}</tbody></table></div>`
+      :`<div class="empty"><i class="fas fa-inbox"></i><h3>Nenhum anúncio</h3><a class="btn btn-pri" onclick="go('publicar')">Publicar primeiro</a></div>`}`;
+
+  if(tab==='favoritos')return`
+    <h2 style="margin-bottom:18px">Favoritos (${favs.length})</h2>
+    ${favs.length?`<div class="agrid">${favs.map(renderAdCard).join('')}</div>`:`<div class="empty"><i class="far fa-heart"></i><h3>Nenhum favorito</h3></div>`}`;
+
+  if(tab==='mensagens')return`
+    <h2 style="margin-bottom:18px">Mensagens (3)</h2>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>De</th><th>Mensagem</th><th>Data</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ana Oliveira</strong></td><td>Olá! O iPhone ainda está disponível?</td><td>15/01 14:30</td><td><span style="background:var(--pri);color:#fff;padding:3px 10px;border-radius:50px;font-size:.8rem;font-weight:600">Nova</span></td></tr>
+        <tr><td><strong>Pedro Santos</strong></td><td>Qual o menor preço do MacBook?</td><td>14/01 10:15</td><td><span style="background:var(--pri);color:#fff;padding:3px 10px;border-radius:50px;font-size:.8rem;font-weight:600">Nova</span></td></tr>
+        <tr><td><strong>Mariana Costa</strong></td><td>Posso ver o carro amanhã?</td><td>13/01 18:45</td><td><span style="color:var(--g400)">Lida</span></td></tr>
+      </tbody>
+    </table></div>`;
+
+  return renderPainelContent();
+}
+
+// ===== DETAIL =====
+function renderDetail(){
+  const a=state.anuncios.find(x=>x.id===state.currentAnuncioId);
+  if(!a){go('home');return}
+  const isFav=state.favoritos.has(a.id);
+  const cat=state.categorias.find(c=>c.id===a.categoria_id);
+  const seller=MOCK_USERS[a.usuario_id]||{nome:'Vendedor',telefone:''};
+  const area=$('#detailArea');
+  if(!area)return;
+  area.innerHTML=`
+    <div>
+      <div class="dgallery">
+        ${a.imagem_url?`<img src="${esc(a.imagem_url)}" alt="${esc(a.titulo)}">`:`<div class="noimg"><i class="fas fa-image"></i></div>`}
+      </div>
+      <div class="dinfo">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span style="background:var(--pri);color:#fff;padding:4px 12px;border-radius:50px;font-size:.82rem;font-weight:600">${esc(cat?.nome||'')}</span>
+          ${a.destaque?'<span style="background:var(--acc);color:var(--g800);padding:4px 12px;border-radius:50px;font-size:.82rem;font-weight:600;margin-left:6px">⭐ Destaque</span>':''}</div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-sm ${isFav?'btn-pri':'btn-out'}" data-fav="${a.id}" onclick="toggleFav(${a.id})"><i class="${isFav?'fas':'far'} fa-heart"></i></button>
+            <button class="btn btn-sm btn-out" onclick="sharePage()"><i class="fas fa-share-alt"></i></button>
+          </div>
+        </div>
+        <h1 style="margin-top:12px">${esc(a.titulo)}</h1>
+        <div class="dprice">${fmt(a.preco)}${a.tipo==='aluguel'?'<span style="font-size:1.15rem;font-weight:400;color:var(--g500)">/mês</span>':''}</div>
+        <div class="dmeta">
+          <span><i class="fas fa-map-marker-alt"></i> ${esc(a.cidade)}, ${esc(a.estado)}</span>
+          <span><i class="far fa-clock"></i> ${timeAgo(a.criado_em)}</span>
+          <span><i class="far fa-eye"></i> ${(a.views||0).toLocaleString()} views</span>
+          <span><i class="fas fa-tag"></i> ${esc(a.condicao)}</span>
+          <span><i class="fas fa-hashtag"></i> #${a.id}</span>
+        </div>
+        <div class="ddesc"><h3>Descrição</h3><p>${esc(a.descricao)}</p></div>
+      </div>
+    </div>
+    <aside class="dside">
+      <div class="scard">
+        <h3><i class="fas fa-user-circle"></i> Vendedor</h3>
+        <div class="sinfo">
+          <div class="avatar avatar-lg">${ini(seller.nome)}</div>
+          <div><div class="sn">${esc(seller.nome)}</div><div class="sm">Membro ativo</div></div>
+        </div>
+        <div class="cbtns">
+          ${state.user&&state.user.id!==a.usuario_id?`
+            <button class="btn btn-pri" onclick="openMsg('${a.usuario_id}',${a.id})"><i class="fas fa-comment-dots"></i> Enviar Mensagem</button>
+            ${seller.telefone?`<a href="https://wa.me/55${seller.telefone.replace(/\D/g,'')}" target="_blank" class="btn" style="background:#25D366;color:#fff"><i class="fab fa-whatsapp"></i> WhatsApp</a>`:''}
+          `:state.user&&state.user.id===a.usuario_id?`
+            <button class="btn btn-gry" onclick="deleteAnuncio(${a.id})"><i class="fas fa-trash"></i> Excluir</button>
+          `:`
+            <a class="btn btn-pri" onclick="showModal('loginModal')"><i class="fas fa-sign-in-alt"></i> Entrar para Contatar</a>
+          `}
+        </div>
+      </div>
+      <div class="stips">
+        <h4><i class="fas fa-shield-alt"></i> Dicas de Segurança</h4>
+        <ul>
+          <li>Nunca envie dinheiro sem ver o produto</li>
+          <li>Prefira encontros em locais públicos</li>
+          <li>Desconfie de preços muito abaixo do mercado</li>
+          <li>Use o chat da plataforma</li>
+        </ul>
+      </div>
+    </aside>`;
+}
+
+// ===== SUBMIT =====
+function submitAnuncio(e){
+  e.preventDefault();
+  if(!state.user){showModal('loginModal');return}
+  const form=e.target;
+  const tipo=form.querySelector('input[name=tipo]:checked')?.value||'venda';
+  const novo={
+    id:Date.now(),
+    usuario_id:state.user.id,
+    categoria_id:parseInt(form.categoria_id.value),
+    titulo:form.titulo.value,
+    descricao:form.descricao.value,
+    preco:parseFloat(form.preco.value),
+    tipo:tipo,
+    condicao:form.condicao.value,
+    cidade:form.cidade.value,
+    estado:form.estado.value,
+    imagem_url:form.imagem.value||'',
+    status:'ativo',destaque:false,views:0,criado_em:new Date().toISOString()
+  };
+  state.anuncios.unshift(novo);
+  toast('Anúncio publicado com sucesso! 🎉','s');
+  go('anuncio',{currentAnuncioId:novo.id});
+}
+
+// ===== FILTER =====
+function doFilter(){
+  let result=[...state.anuncios].filter(a=>a.status==='ativo');
+  const cat=$('#fCat')?.value||state.searchCat;
+  const q=state.searchQuery||$('#hdrQ')?.value||'';
+  const est=$('#fEst')?.value||'';
+  const pmin=parseFloat($('#fPmin')?.value)||0;
+  const pmax=parseFloat($('#fPmax')?.value)||0;
+  const cond=$$$$('input[name="fCond"]:checked')[0]?.value||'';
+  const tipo=$$('input[name="fTipo"]:checked')[0]?.value||'';
+
+  if(cat)result=result.filter(a=>a.categoria_id==cat);
+  if(q)result=result.filter(a=>(a.titulo+a.descricao).toLowerCase().includes(q.toLowerCase()));
+  if(est)result=result.filter(a=>a.estado===est);
+  if(pmin)result=result.filter(a=>a.preco>=pmin);
+  if(pmax)result=result.filter(a=>a.preco<=pmax);
+  if(cond)result=result.filter(a=>a.condicao===cond);
+  if(tipo)result=result.filter(a=>a.tipo===tipo);
+
+  const ord=state.searchOrd||'recentes';
+  if(ord==='recentes')result.sort((a,b)=>new Date(b.criado_em)-new Date(a.criado_em));
+  if(ord==='menor')result.sort((a,b)=>a.preco-b.preco);
+  if(ord==='maior')result.sort((a,b)=>b.preco-a.preco);
+  if(ord==='vistas')result.sort((a,b)=>(b.views||0)-(a.views||0));
+
+  const grid=('#gridBusca');
+  if(grid)grid.innerHTML=result.length?result.map(renderAdCard).join(''):`<div class="empty" style="grid-column:1/-1"><i class="fas fa-search"></i><h3>Nenhum resultado</h3><p>Tente alterar os filtros.</p></div>`;
+  const rc=$('#rCount');
+  if(rc)rc.innerHTML=`<b>${result.length}</b> resultado(s)`;
+}
+
+// ===== RENDER =====
+function render(){
+  const app=$('#app');
+  switch(state.route){
+    case'home':app.innerHTML=renderHome();break;
+    case'buscar':app.innerHTML=renderBuscar();doFilter();break;
+    case'anuncio':app.innerHTML=renderAnuncio();renderDetail();break;
+    case'publicar':app.innerHTML=renderPublicar();break;
+    case'painel':app.innerHTML=renderPainel();break;
+    default:app.innerHTML=renderHome();
+  }
+}
+
+// ===== INIT =====
+(function(){
+  // Load cats into header
+  const nav=$('#catNav');
+  nav.innerHTML=MOCK_CATS.map(c=>`<a class="cl" onclick="go('buscar',{searchCat:${c.id}})"><i class="fas ${c.icone}"></i> ${esc(c.nome)}</a>`).join('')+`<a class="cl" onclick="go('buscar')"><i class="fas fa-th-large"></i> Todas</a>`;
+  const sel=$('#hdrCat');
+  sel.innerHTML='<option value="">Todas</option>'+MOCK_CATS.map(c=>`<option value="${c.id}">${esc(c.nome)}</option>`).join('');
+  updateHeader();
+  render();
+})();
+
+// Máscara de telefone
+document.addEventListener('input',e=>{
+  if(e.target.type==='tel'){let v=e.target.value.replace(/\D/g,'');if(v.length<=11){v=v.replace(/^(\d{2})(\d)/,'($1) $2');v=v.replace(/(\d{5})(\d)/,'$1-$2')}e.target.value=v}
+});
+
+// Tipo options click
+document.addEventListener('click',e=>{
+  const opt=e.target.closest('.tipo-opt');
+  if(opt){
+    $$$$('.tipo-opt').forEach(o=>{o.style.borderColor='var(--g200)';o.style.background='transparent'});
+    opt.style.borderColor='var(--pri)';opt.style.background='rgba(229,62,62,.05)';
+    opt.querySelector('input[type=radio]').checked=true;
+  }
+});
+</script>
+</body>
+</html>
